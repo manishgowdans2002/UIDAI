@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UPLOAD EKYC</title>
+  </head>
+  <img class="img" src="a.jpg" />
+  <body>
+    <div>
+      <input class="choose" value="Upload ekyc" type="file" />
+
+      <textarea class="text" cols="100" rows="20"></textarea>
+
+      <textarea
+        class="text"
+        id="msg"
+        name="msg"
+        placeholder="Copy the address from beside and make any changes ..."
+        style="height: 100px"
+      ></textarea>
+    </div>
+
+    <div>
+      <input
+        class="download"
+        type="button"
+        id="bt"
+        value="Download"
+        onclick="saveFile()"
+      />
+    </div>
+
+    <script>
+      let input = document.querySelector("input");
+      let textarea = document.querySelector("textarea");
+      var lines;
+      input.addEventListener("change", () => {
+        let files = input.files;
+
+        if (files.length == 0) return;
+
+        const file = files[0];
+
+        let reader = new FileReader();
+
+        reader.onload = (e) => {
+          const file = e.target.result;
+
+          lines = file.split(/\r\n|\n/);
+
+          //lines = lines.replace(/(\r\n|\n|\r)/gm, "");
+          textarea.value = lines.join("\n");
+          var s = file.split("?");
+
+          console.log(lines);
+          /////////////////////////////////////////////
+          var i = lines.length;
+          while (i--) !/\S/.test(lines[i]) && lines.splice(i, 1);
+          console.log(lines);
+        };
+
+        reader.onerror = (e) => alert(e.target.error.name);
+
+        reader.readAsText(file);
+      });
+
+      function updateNumberList(array1) {
+        var s = "";
+        for (var i = 0; i < 2; i++) {
+          s += array1[i] + "\n";
+        }
+        document.getElementById("numberList").innerHTML = s;
+      }
+
+      function randOrder(array1) {
+        var j,
+          x,
+          i = 0,
+          len = array1.length;
+        for (i; i < len; i++) {
+          j = Math.floor(Math.random() * len);
+          x = array1[i];
+          array1[i] = array1[j];
+          array1[j] = x;
+        }
+      }
+      //////////////////////////////////////////////////////////
+      let saveFile = () => {
+        const msg = document.getElementById("msg");
+
+        // This variable stores all the data.
+        let data = msg.value;
+
+        // Convert the text to BLOB.
+        const textToBLOB = new Blob([data], { type: "text/plain" });
+        const sFileName = "addressupdate.text"; // The file to save the data.
+
+        let newLink = document.createElement("a");
+        newLink.download = sFileName;
+
+        if (window.webkitURL != null) {
+          newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+        } else {
+          newLink.href = window.URL.createObjectURL(textToBLOB);
+          newLink.style.display = "none";
+          document.body.appendChild(newLink);
+        }
+
+        newLink.click();
+      };
+    </script>
+  </body>
+  <body>
+    <div class="loc">
+      <a class="tenet" href="uidai.ejs">NEXT &rightarrow;</a>
+    </div>
+  </body>
+  <style>
+    .img {
+      width: 90rem;
+      position: relative;
+      transform: translateX(-0.3rem) translateY(-3rem);
+    }
+
+    .choose {
+      position: relative;
+      transform: translateY(-60rem) translateX(10rem);
+    }
+    .text {
+      position: relative;
+      transform: translateY(-30rem) translateX(-10rem);
+    }
+    .download {
+      position: relative;
+      transform: translateY(-32rem) translateX(70rem);
+      cursor: pointer;
+    }
+    body {
+      overflow-y: hidden;
+      overflow-x: hidden;
+    }
+    .loc {
+      position: relative;
+      transform: translateY(-34rem) translateX(78rem);
+      font-family: "Times New Roman", Times, serif;
+      font-size: 1.5rem;
+      color: darkorange;
+    }
+    .tenet {
+      text-decoration: none;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-size: 2rem;
+      position: relative;
+      color: darkred;
+
+      transform: translateY(-30rem);
+    }
+  </style>
+</html>

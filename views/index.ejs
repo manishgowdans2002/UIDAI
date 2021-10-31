@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Message sender</title>
+  </head>
+  <body>
+    <img src="send.jpg" />
+    <form class="move" action="/sendMessage" method="post">
+      <div class="form-group">
+        <div class="send2">Send Request Message</div>
+        <br />
+        <input
+          class="num1"
+          type="text"
+          id="number"
+          placeholder="Enter number"
+          name="number"
+        />
+      </div>
+      <br />
+      <div class="num2">
+        <input
+          class="num1"
+          type="text"
+          name="message"
+          placeholder="Request for address"
+          id="message"
+        />*Do not forget to mention you email
+      </div>
+      <br />
+
+      <input class="send" type="submit" value="Send message" /><br /><br />
+      <a class="tenet" href="index2.ejs">NEXT &rightarrow;</a>
+    </form>
+  </body>
+  <style>
+    body {
+      overflow-y: hidden;
+      overflow-x: hidden;
+    }
+    .num1 {
+      position: relative;
+      border: none;
+      border-bottom: 1px solid #000000;
+      font-size: 1.5rem;
+    }
+    .num2 {
+      font-family: "Times New Roman", Times, serif;
+      color: red;
+      font-size: 2rem;
+    }
+    .send {
+      border-radius: 2rem;
+      font-size: 1.7rem;
+      cursor: pointer;
+      width: 15rem;
+    }
+    .tenet {
+      text-decoration: none;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 2rem;
+      position: relative;
+      color: blue;
+    }
+    .move {
+      position: relative;
+      transform: translateY(-40rem) translateX(30rem);
+    }
+    .send2 {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 3rem;
+    }
+  </style>
+</html>

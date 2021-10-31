@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document upload</title>
+  </head>
+  <body>
+    <img class="img" src="s.jpg" />
+    <center class="move">
+
+      <div class="b">Government Id</div>
+      <br />
+      <form action="/web" method="post" enctype="multipart/form-data">
+        <input class="d" type="file" name="avatar" />
+
+        <button class="c">Submit</button>
+      </form>
+      <br />
+      
+    <a class="tenet" href="index4.ejs">NEXT &RightArrow;</a>
+  </body>
+  <style>
+    body {
+      overflow-y: hidden;
+      overflow-x: hidden;
+    }
+    
+    .tenet {
+      text-decoration: none;
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      font-size: 3rem;
+      position: relative;
+      color: darkred;
+    }
+    .img {
+      position: relative;
+      transform: translateX(-10rem) translateY(-10rem);
+      max-width: 120rem;
+    }
+    
+    .b {
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-size: 3rem;
+      color: darkred;
+    }
+    .c {
+      border-radius: 2rem;
+      font-size: 2rem;
+      width: 10rem;
+    }
+    .d {
+      font-size: 2rem;
+    }
+    .move {
+      position: relative;
+      transform: translateY(-65rem);
+    }
+  </style>
+</html>

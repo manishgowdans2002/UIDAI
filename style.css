@@ -1,0 +1,14 @@
+.box1 {
+  display: block;
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
+  margin: 14px auto;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+}
+
+.box1:focus {
+  outline: 0;
+  border-color: #f9cb81;
+}

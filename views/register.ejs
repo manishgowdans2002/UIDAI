@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Register</title>
+  </head>
+  
+  <div class="move2">
+  <img class="img" src="reg4.jpg"/>
+<form>
+  <div class="move">
+    <img class="img2" src="aadhar.png">
+  <div class="s">Register Here</div>
+  <br/>
+  <br/>
+     <div class="input">
+        
+    <input class="box3" type="text" id="name" placeholder="Username" required><br> <br> 
+    
+    <input class="box3" type="password" id="pw" name="lname" placeholder="Password" required><br> <br> 
+    <input class="box3" type="password" id="pw1" name="lname" placeholder="Confirm Password" required><br> <br>   
+
+    <button class="register" id="rgstr_btn" onclick="store()" >Register</button>
+    <!-- <input id="rgstr_btn" type="submit" value="Register" onclick="store()"> -->
+    <br> <br>
+    <div class="user">If already an User <br/> then
+    <a class="login" href="login.ejs">login</a>
+  </div>
+    <div id="msg">
+            <pre></pre>
+        </div>
+      </div>
+    </form>
+  </div>
+    <script type="text/javascript" language="javascript" src="index.js"></script>
+    <script>function store() {
+        var name = document.getElementById("name");
+        var pw = document.getElementById("pw");
+        var pw1 = document.getElementById("pw1");
+      if(pw.value!=pw1.value){alert("Password mismatched");};
+     
+        if (name.value.length == 0) {
+          alert("Please fill in email");
+        } else if (pw.value.length == 0) {
+          alert("Please fill in password");
+        } else {
+          localStorage.setItem("name", name.value);
+          localStorage.setItem("pw", pw.value);
+        }
+      }</script>
+<style>
+  body{
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+.box3
+{
+  position: relative;
+      border: none;
+      border-bottom: 1px solid #000000;
+      font-size: 2rem;
+      border-radius: 20rem;
+      
+}
+.register{
+  border-radius: 2rem;
+      font-size: 2rem;
+      background-color:lightskyblue;
+      width: 10rem;
+      cursor: pointer;
+}
+.register:hover {
+      background-color:mediumspringgreen;
+      transition: smooth;
+      
+    }
+    .user{
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-size: 2rem;
+    }
+    .login{
+      text-decoration: none;
+      color: blue;
+      cursor: pointer;
+    }
+    .s{
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-size: 4rem;
+    }
+    .move{
+      position: relative;
+      transform: translateX(60rem) translateY(-44rem);
+    }
+    .img{
+      position: relative;
+      transform: translateY(9rem);
+    }
+    .move2{
+      position: relative;
+      transform: translateY(-30rem);
+    }
+    .img2{
+      position: relative;
+      transform: translateY(19rem) translateX(-40rem);
+    }
+</style>
+</html>

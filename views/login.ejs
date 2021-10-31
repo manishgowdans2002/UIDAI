@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Login</title>
+    <img class="img2" src="wave.png" />
+    <div class="move">
+      <div class="welcome">WELCOME</div>
+      <img class="img" src="user2.png" />
+      <div class="input">
+        <br />
+        <br />
+        <input
+          class="box1"
+          type="text"
+          for="userName"
+          id="userName"
+          placeholder="UserName"
+          class="fas fa-user"
+        /><br />
+        <br />
+
+        <input
+          class="box2"
+          type="password"
+          id="userPw"
+          name="lname"
+          placeholder="password"
+        /><br />
+        <br />
+
+        <!-- <button class="button"><a class="button1" href="submit.html" onclick="go()"> Submit &rightarrow; </a></button> -->
+        <input
+          id="login_btn"
+          class="submit submit1"
+          type="submit"
+          value="Login"
+          onclick="check()"
+        />
+
+        <h2 class="register">
+          If not registered <br />
+          then please
+          <a class="button2" href="register.ejs">Register</a>
+        </h2>
+      </div>
+    </div>
+  </head>
+  <script type="text/javascript" language="javascript" src="index.js"></script>
+  <script>
+    function store() {
+      var name = document.getElementById("name");
+      var pw = document.getElementById("pw");
+
+      if (name.value.length == 0) {
+        alert("Please fill in email");
+      } else if (pw.value.length == 0) {
+        alert("Please fill in password");
+      } else {
+        localStorage.setItem("name", name.value);
+        localStorage.setItem("pw", pw.value);
+      }
+    }
+    function check() {
+      var storedName = localStorage.getItem("name");
+      var storedPw = localStorage.getItem("pw");
+
+      var userName = document.getElementById("userName");
+      var userPw = document.getElementById("userPw");
+
+      if (userName.value == storedName && userPw.value == storedPw) {
+        window.location.href = "submit.ejs";
+      } else {
+        alert("Error on login");
+      }
+    }
+  </script>
+  <style>
+    body {
+      overflow-y: hidden;
+      overflow-x: hidden;
+    }
+    .box1 {
+      position: relative;
+      border: none;
+      border-bottom: 1px solid #000000;
+      font-size: 2rem;
+    }
+
+    .box2 {
+      position: relative;
+      border: none;
+      border-bottom: 1px solid #000000;
+      font-size: 2rem;
+    }
+    .submit {
+      border-radius: 2rem;
+      font-size: 2rem;
+      background-color: aqua;
+    }
+
+    .submit1 {
+      width: 10rem;
+    }
+    .submit:hover {
+      background-color: cornflowerblue;
+      transition: smooth;
+    }
+
+    .register {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 2rem;
+    }
+
+    .button2 {
+      text-decoration: none;
+      color: blue;
+    }
+    .welcome {
+      font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+      font-size: 3rem;
+    }
+    .move {
+      position: relative;
+      transform: translateX(60rem) translateY(-50rem);
+    }
+    .img2 {
+      position: relative;
+      transform: translateY(-7rem) translateX(-0.1rem);
+    }
+  </style>
+</html>

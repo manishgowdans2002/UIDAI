@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UIDAI</title>
+  </head>
+  <body>
+    <img class="img" src="a.jpg" />
+    <div>
+      <input class="choose" type="file" />
+
+      <textarea
+        class="text"
+        placeholder="Upload the location file sent by landlord...."
+      ></textarea>
+    </div>
+    <div class="choose1">
+      Upload you AADHAAR CARD<br />
+      and UPDATED ADDRESS to<br />
+      UIDAI DATABSE <br />bellow
+    </div>
+    <input class="choose1" type="file" />
+
+    <script>
+      let input = document.querySelector("input");
+      let textarea = document.querySelector("textarea");
+      var lines;
+      input.addEventListener("change", () => {
+        let files = input.files;
+
+        if (files.length == 0) return;
+
+        const file = files[0];
+
+        let reader = new FileReader();
+
+        reader.onload = (e) => {
+          const file = e.target.result;
+
+          lines = file.split(/\r\n|\n/);
+
+          //lines = lines.replace(/(\r\n|\n|\r)/gm, "");
+          textarea.value = lines.join("\n");
+          var s = file.split("?");
+
+          console.log(lines);
+          /////////////////////////////////////////////
+          var i = lines.length;
+          while (i--) !/\S/.test(lines[i]) && lines.splice(i, 1);
+          console.log(lines);
+        };
+
+        reader.onerror = (e) => alert(e.target.error.name);
+
+        reader.readAsText(file);
+      });
+
+      function updateNumberList(array1) {
+        var s = "";
+        for (var i = 0; i < 2; i++) {
+          s += array1[i] + "\n";
+        }
+        document.getElementById("numberList").innerHTML = s;
+      }
+
+      function randOrder(array1) {
+        var j,
+          x,
+          i = 0,
+          len = array1.length;
+        for (i; i < len; i++) {
+          j = Math.floor(Math.random() * len);
+          x = array1[i];
+          array1[i] = array1[j];
+          array1[j] = x;
+        }
+      }
+      //////////////////////////////////////////////////////////
+      let saveFile = () => {
+        const msg = document.getElementById("msg");
+
+        // This variable stores all the data.
+        let data = msg.value;
+
+        // Convert the text to BLOB.
+        const textToBLOB = new Blob([data], { type: "text/plain" });
+        const sFileName = "formData.text"; // The file to save the data.
+
+        let newLink = document.createElement("a");
+        newLink.download = sFileName;
+
+        if (window.webkitURL != null) {
+          newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+        } else {
+          newLink.href = window.URL.createObjectURL(textToBLOB);
+          newLink.style.display = "none";
+          document.body.appendChild(newLink);
+        }
+
+        newLink.click();
+      };
+    </script>
+  </body>
+  <body>
+    <div class="loc">
+      <p>Click the button to get your coordinates.</p>
+
+      <button onclick="getLocation()">Try It</button>
+
+      <p>
+        <strong>Note:</strong> Match your location with beside<br />
+        If not matching then click
+        <a href="https://www.mapsofindia.com/lat_long/karnataka/">HERE</a>..
+        <br /><br />1) Modify only house or floor number<br /><br />
+        2)Check your Street NAME with that of <br />landlord's
+      </p>
+
+      <p id="demo"></p>
+
+      <script>
+        var x = document.getElementById("demo");
+
+        function getLocation() {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+          } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+          }
+        }
+
+        function showPosition(position) {
+          x.innerHTML =
+            "Latitude: " +
+            position.coords.latitude +
+            "<br>Longitude: " +
+            position.coords.longitude;
+        }
+      </script>
+    </div>
+  </body>
+  <style>
+    .img {
+      width: 90rem;
+      position: relative;
+      transform: translateX(-0.3rem) translateY(-1rem);
+    }
+
+    .choose {
+      position: relative;
+      transform: translateY(-40rem) translateX(10rem);
+    }
+    .choose1 {
+      position: relative;
+      transform: translateY(-40rem) translateX(60rem);
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-size: 1.5rem;
+      color: black;
+    }
+    .text {
+      position: relative;
+      transform: translateY(-35rem) translateX(-10rem);
+      height: 3rem;
+    }
+
+    body {
+      overflow-y: hidden;
+      overflow-x: hidden;
+    }
+    .loc {
+      position: relative;
+      transform: translateY(-50rem) translateX(22rem);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      font-size: 1.5rem;
+      color: black;
+    }
+    .tenet {
+      text-decoration: none;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-size: 2rem;
+      position: relative;
+      color: darkred;
+
+      transform: translateY(-20rem);
+    }
+  </style>
+</html>

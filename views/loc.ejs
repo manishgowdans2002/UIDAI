@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Location</title>
+  </head>
+  <body>
+    <img class="img" src="a.jpg" />
+    <div>
+      <textarea
+        class="text"
+        id="msg"
+        name="msg"
+        placeholder="Copy the location here...."
+      ></textarea>
+    </div>
+    <div>
+      <input
+        class="text"
+        type="button"
+        id="bt"
+        value="Download"
+        onclick="saveFile()"
+      />
+    </div>
+
+    <script>
+      let input = document.querySelector("input");
+      let textarea = document.querySelector("textarea");
+      var lines;
+      input.addEventListener("change", () => {
+        let files = input.files;
+
+        if (files.length == 0) return;
+
+        const file = files[0];
+
+        let reader = new FileReader();
+
+        reader.onload = (e) => {
+          const file = e.target.result;
+
+          lines = file.split(/\r\n|\n/);
+
+          //lines = lines.replace(/(\r\n|\n|\r)/gm, "");
+          textarea.value = lines.join("\n");
+          var s = file.split("?");
+
+          console.log(lines);
+          /////////////////////////////////////////////
+          var i = lines.length;
+          while (i--) !/\S/.test(lines[i]) && lines.splice(i, 1);
+          console.log(lines);
+        };
+
+        reader.onerror = (e) => alert(e.target.error.name);
+
+        reader.readAsText(file);
+      });
+
+      function updateNumberList(array1) {
+        var s = "";
+        for (var i = 0; i < 2; i++) {
+          s += array1[i] + "\n";
+        }
+        document.getElementById("numberList").innerHTML = s;
+      }
+
+      function randOrder(array1) {
+        var j,
+          x,
+          i = 0,
+          len = array1.length;
+        for (i; i < len; i++) {
+          j = Math.floor(Math.random() * len);
+          x = array1[i];
+          array1[i] = array1[j];
+          array1[j] = x;
+        }
+      }
+      //////////////////////////////////////////////////////////
+      let saveFile = () => {
+        const msg = document.getElementById("msg");
+
+        // This variable stores all the data.
+        let data = msg.value;
+
+        // Convert the text to BLOB.
+        const textToBLOB = new Blob([data], { type: "text/plain" });
+        const sFileName = "location.text"; // The file to save the data.
+
+        let newLink = document.createElement("a");
+        newLink.download = sFileName;
+
+        if (window.webkitURL != null) {
+          newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+        } else {
+          newLink.href = window.URL.createObjectURL(textToBLOB);
+          newLink.style.display = "none";
+          document.body.appendChild(newLink);
+        }
+
+        newLink.click();
+      };
+    </script>
+  </body>
+  <body>
+    <div class="loc">
+      <p>Click the button to get your coordinates.</p>
+
+      <button onclick="getLocation()">Try It</button>
+      <a class="tenet" href="select.ejs">Go Back &RightArrow;</a>
+
+      <p id="demo"></p>
+
+      <script>
+        var x = document.getElementById("demo");
+
+        function getLocation() {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+          } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+          }
+        }
+
+        function showPosition(position) {
+          x.innerHTML =
+            "Latitude: " +
+            position.coords.latitude +
+            "<br>Longitude: " +
+            position.coords.longitude;
+        }
+      </script>
+    </div>
+  </body>
+  <style>
+    .img {
+      width: 90rem;
+      position: relative;
+      transform: translateX(-0.3rem) translateY(-1rem);
+    }
+
+    .choose {
+      position: relative;
+      transform: translateY(-40rem) translateX(10rem);
+    }
+    .choose1 {
+      position: relative;
+      transform: translateY(-40rem) translateX(60rem);
+      font-family: "Times New Roman", Times, serif;
+      font-size: 1.5rem;
+      color: darkorange;
+    }
+    .text {
+      position: relative;
+      transform: translateY(-25rem) translateX(20rem);
+      height: 3rem;
+    }
+
+    body {
+      overflow-y: hidden;
+      overflow-x: hidden;
+    }
+    .loc {
+      position: relative;
+      transform: translateY(-50rem) translateX(22rem);
+      font-family: "Times New Roman", Times, serif;
+      font-size: 1.5rem;
+      color: darkorange;
+    }
+    .tenet {
+      text-decoration: none;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-size: 2rem;
+
+      color: darkred;
+      position: relative;
+      transform: translateY(10rem);
+    }
+  </style>
+</html>
